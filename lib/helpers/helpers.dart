@@ -13,8 +13,10 @@ void cambiarStatusDark() {
 }
 
 void cambiarColorStatus() {
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-    systemNavigationBarColor: Colors.transparent,
-  ));
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Color(0xff2EB7B7),
+      systemNavigationBarColor: Color(0xff2EB7B7),
+    ),
+  );
 }
