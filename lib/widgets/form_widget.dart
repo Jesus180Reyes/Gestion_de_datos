@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:gestiones_app/helpers/mostrar_alerta.dart';
+import 'package:gestiones_app/services/authservices.dart';
 import 'package:gestiones_app/ui/boton_azul.dart';
 import 'package:gestiones_app/widgets/textfield_widget.dart';
+import 'package:provider/provider.dart';
 
 class CustomForm extends StatelessWidget {
   const CustomForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final authServices = Provider.of<AuthServices>(context);
+
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
     return Column(
@@ -27,8 +32,20 @@ class CustomForm extends StatelessWidget {
         const SizedBox(height: 20),
         BotonAzul(
           title: 'Incio de Sesion',
-          onPressed: () {
-            Navigator.pushNamed(context, 'home');
+          onPressed: () async {
+            FocusScope.of(context).unfocus();
+            final loginOk = await authServices.login(
+              email: emailController.text.trim(),
+              password: passwordController.text.trim(),
+              // Navigator.pushNamed(context, 'home');
+            );
+
+            if (loginOk) {
+              Navigator.pushReplacementNamed(context, 'home');
+            } else {
+              mostrarAlerta(
+                  context, 'login Incorrecto', 'Revisa tus credenciales ');
+            }
           },
         ),
       ],
@@ -41,6 +58,7 @@ class CustomFormRegister extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthServices>(context);
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
     final nameController = TextEditingController();
@@ -85,8 +103,20 @@ class CustomFormRegister extends StatelessWidget {
         const SizedBox(height: 20),
         BotonAzul(
           title: 'Registrarse',
-          onPressed: () {
-            Navigator.pushReplacementNamed(context, 'home');
+          onPressed: () async {
+            final registroOk = await authProvider.register(
+              email: emailController.text.trim(),
+              password: passwordController.text.trim(),
+              nombre: nameController.text.trim(),
+              apellido: lastNameController.text.trim(),
+              telefono: phoneController.text.trim(),
+            );
+            if (registroOk == true) {
+              Navigator.pushReplacementNamed(context, 'home');
+            } else {
+              mostrarAlerta(
+                  context, 'Registro Incorrecto', registroOk.toString());
+            }
           },
         ),
       ],

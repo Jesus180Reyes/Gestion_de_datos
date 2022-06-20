@@ -1,22 +1,28 @@
 import 'package:gestiones_app/models/alldrivers_model.dart';
 
 final List allDrivers = [
-  AllDrivers(
-    id: '1',
-    name: 'Francisco Morales',
-    phone: '123456789',
+  UsuarioResponse(
+    apellido: 'Reys',
+    nombre: 'Gonzalo',
+    email: 'test12@gmail.com',
+    online: true,
     createdAt: DateTime.now(),
+    uid: '1',
   ),
-  AllDrivers(
-    id: '2',
-    name: 'Emilio Morales',
-    phone: '123456789',
+  UsuarioResponse(
+    apellido: 'Reys',
+    nombre: 'Gonzalo',
+    email: 'test12@gmail.com',
+    online: true,
     createdAt: DateTime.now(),
+    uid: '1',
   ),
-  AllDrivers(
-    id: '3',
-    name: 'Gonzalo Morales',
-    phone: '123456789',
+  UsuarioResponse(
+    apellido: 'Reys',
+    nombre: 'Gonzalo',
+    email: 'test12@gmail.com',
+    online: true,
     createdAt: DateTime.now(),
+    uid: '1',
   ),
 ];
