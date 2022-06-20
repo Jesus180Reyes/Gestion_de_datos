@@ -95,7 +95,7 @@ class ListTripsWidget extends StatelessWidget {
 }
 
 class ListDriversWidget extends StatelessWidget {
-  final AllDrivers allTripsModel;
+  final UsuarioResponse allTripsModel;
 
   const ListDriversWidget({
     Key? key,
@@ -139,14 +139,14 @@ class ListDriversWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                allTripsModel.name,
+                allTripsModel.nombre,
                 style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
-                allTripsModel.phone,
+                allTripsModel.email,
                 style: const TextStyle(
                   fontSize: 15,
                 ),
@@ -159,7 +159,7 @@ class ListDriversWidget extends StatelessWidget {
               SizedBox(
                 width: size.width * 0.25,
                 child: Text(
-                  '-${allTripsModel.id}',
+                  '-${allTripsModel.uid}',
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     fontSize: 20,

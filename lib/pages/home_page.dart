@@ -4,16 +4,19 @@ import 'package:flutter/painting.dart';
 import 'package:gestiones_app/data/alldrivers.dart';
 import 'package:gestiones_app/data/alltrips.dart';
 import 'package:gestiones_app/helpers/helpers.dart';
+import 'package:gestiones_app/services/authservices.dart';
 import 'package:gestiones_app/ui/boxicon.dart';
 import 'package:gestiones_app/widgets/headerlabel.dart';
 import 'package:gestiones_app/widgets/listripwidget.dart';
 import 'package:gestiones_app/widgets/login/customwelcome_widget.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthServices>(context);
     cambiarColorStatus();
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -23,7 +26,10 @@ class HomePage extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
-              CustomWelcomeWidgets(size: size),
+              CustomWelcomeWidgets(
+                size: size,
+                usuarioResponse: authService.usuarioResponse!,
+              ),
               _CustomColumn(size: size),
             ],
           ),
@@ -43,6 +49,7 @@ class _CustomColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authServices = Provider.of<AuthServices>(context);
     return Container(
       padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
       // height: size.height,
@@ -65,18 +72,22 @@ class _CustomColumn extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               BoxIcon(
+                onPressed: () => {
+                  authServices.logOut(),
+                  Navigator.pushReplacementNamed(context, 'login'),
+                },
                 icon: Icons.person,
                 title: 'Conductores',
                 color: Colors.purple,
               ),
-              BoxIcon(
+              const BoxIcon(
                 icon: Icons.monetization_on,
                 title: 'Conductores',
                 color: Colors.indigo,
               ),
-              BoxIcon(
+              const BoxIcon(
                 icon: Icons.history,
                 title: 'Historial',
                 color: Colors.green,

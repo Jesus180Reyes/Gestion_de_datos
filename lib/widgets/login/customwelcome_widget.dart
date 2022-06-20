@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:gestiones_app/models/alldrivers_model.dart';
 
 class CustomWelcomeWidgets extends StatelessWidget {
+  final UsuarioResponse usuarioResponse;
   const CustomWelcomeWidgets({
     Key? key,
     required this.size,
+    required this.usuarioResponse,
   }) : super(key: key);
 
   final Size size;
@@ -23,7 +26,7 @@ class CustomWelcomeWidgets extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Hello Malik',
+                  'Hello ${usuarioResponse.nombre}',
                   textAlign: TextAlign.start,
                   style: TextStyle(
                     fontSize: 20,
@@ -47,12 +50,12 @@ class CustomWelcomeWidgets extends StatelessWidget {
             // color: Colors.green,
             padding: const EdgeInsets.only(right: 25, bottom: 10, top: 17),
             alignment: Alignment.topCenter,
-            child: const CircleAvatar(
+            child: CircleAvatar(
               radius: 40,
               backgroundColor: Colors.indigo,
               child: Text(
-                'TR',
-                style: TextStyle(
+                '${usuarioResponse.nombre.substring(0, 1)}${usuarioResponse.apellido.substring(0, 1)}',
+                style: const TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
