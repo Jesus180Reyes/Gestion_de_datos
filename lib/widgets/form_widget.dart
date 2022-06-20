@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gestiones_app/helpers/mostrar_alerta.dart';
 import 'package:gestiones_app/services/authservices.dart';
+import 'package:gestiones_app/services/socketservices.dart';
 import 'package:gestiones_app/ui/boton_azul.dart';
 import 'package:gestiones_app/widgets/textfield_widget.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +12,7 @@ class CustomForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authServices = Provider.of<AuthServices>(context);
+    final socketServices = Provider.of<SocketService>(context);
 
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
@@ -41,6 +43,7 @@ class CustomForm extends StatelessWidget {
             );
 
             if (loginOk) {
+              socketServices.connect();
               Navigator.pushReplacementNamed(context, 'home');
             } else {
               mostrarAlerta(
@@ -59,6 +62,7 @@ class CustomFormRegister extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthServices>(context);
+    final socketProvider = Provider.of<SocketService>(context);
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
     final nameController = TextEditingController();
@@ -112,6 +116,7 @@ class CustomFormRegister extends StatelessWidget {
               telefono: phoneController.text.trim(),
             );
             if (registroOk == true) {
+              socketProvider.connect();
               Navigator.pushReplacementNamed(context, 'home');
             } else {
               mostrarAlerta(

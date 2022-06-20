@@ -5,6 +5,7 @@ import 'package:gestiones_app/data/alldrivers.dart';
 import 'package:gestiones_app/data/alltrips.dart';
 import 'package:gestiones_app/helpers/helpers.dart';
 import 'package:gestiones_app/services/authservices.dart';
+import 'package:gestiones_app/services/socketservices.dart';
 import 'package:gestiones_app/ui/boxicon.dart';
 import 'package:gestiones_app/widgets/headerlabel.dart';
 import 'package:gestiones_app/widgets/listripwidget.dart';
@@ -50,6 +51,7 @@ class _CustomColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authServices = Provider.of<AuthServices>(context);
+    final socketServices = Provider.of<SocketService>(context);
     return Container(
       padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
       // height: size.height,
@@ -75,6 +77,7 @@ class _CustomColumn extends StatelessWidget {
             children: [
               BoxIcon(
                 onPressed: () => {
+                  socketServices.disconnect(),
                   authServices.logOut(),
                   Navigator.pushReplacementNamed(context, 'login'),
                 },

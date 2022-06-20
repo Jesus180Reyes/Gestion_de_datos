@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gestiones_app/pages/loading_page.dart';
 import 'package:gestiones_app/services/authservices.dart';
 import 'package:gestiones_app/services/coloprovider.dart';
+import 'package:gestiones_app/services/socketservices.dart';
 import 'package:gestiones_app/themes/apptheme.dart';
 import 'package:provider/provider.dart';
 import 'pages/pages.dart';
@@ -11,6 +12,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ColorProvider()),
+        ChangeNotifierProvider(create: (_) => SocketService()),
         ChangeNotifierProvider(create: (_) => AuthServices()),
       ],
       child: const MyApp(),
