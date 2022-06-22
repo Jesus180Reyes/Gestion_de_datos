@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gestiones_app/pages/loading_page.dart';
+import 'package:gestiones_app/pages/usuariosonline_page.dart';
 import 'package:gestiones_app/services/authservices.dart';
 import 'package:gestiones_app/services/coloprovider.dart';
 import 'package:gestiones_app/services/socketservices.dart';
+import 'package:gestiones_app/services/usuarios_services.dart';
 import 'package:gestiones_app/themes/apptheme.dart';
 import 'package:provider/provider.dart';
 import 'pages/pages.dart';
@@ -14,6 +16,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => ColorProvider()),
         ChangeNotifierProvider(create: (_) => SocketService()),
         ChangeNotifierProvider(create: (_) => AuthServices()),
+        ChangeNotifierProvider(create: (_) => UsuariosService()),
       ],
       child: const MyApp(),
     ),
@@ -34,6 +37,7 @@ class MyApp extends StatelessWidget {
         'login': (context) => const LoginPage(),
         'register': (context) => const RegisterPage(),
         'loading': (context) => const LoadingPage(),
+        'usersOnline': (context) => const UsuariosOnlinePage(),
       },
       theme: AppTheme.lightTheme,
     );

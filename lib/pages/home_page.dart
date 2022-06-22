@@ -4,8 +4,10 @@ import 'package:flutter/painting.dart';
 import 'package:gestiones_app/data/alldrivers.dart';
 import 'package:gestiones_app/data/alltrips.dart';
 import 'package:gestiones_app/helpers/helpers.dart';
+import 'package:gestiones_app/helpers/mostrar_alerta.dart';
 import 'package:gestiones_app/services/authservices.dart';
 import 'package:gestiones_app/services/socketservices.dart';
+import 'package:gestiones_app/services/usuarios_services.dart';
 import 'package:gestiones_app/ui/boxicon.dart';
 import 'package:gestiones_app/widgets/headerlabel.dart';
 import 'package:gestiones_app/widgets/listripwidget.dart';
@@ -21,6 +23,13 @@ class HomePage extends StatelessWidget {
     cambiarColorStatus();
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          tripDialog(context);
+        },
+        child: const Icon(Icons.add),
+        backgroundColor: const Color(0xff2EB7B7),
+      ),
       backgroundColor: const Color(0xff2EB7B7),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -40,7 +49,7 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class _CustomColumn extends StatelessWidget {
+class _CustomColumn extends StatefulWidget {
   const _CustomColumn({
     Key? key,
     required this.size,
@@ -49,9 +58,15 @@ class _CustomColumn extends StatelessWidget {
   final Size size;
 
   @override
+  State<_CustomColumn> createState() => _CustomColumnState();
+}
+
+class _CustomColumnState extends State<_CustomColumn> {
+  @override
   Widget build(BuildContext context) {
     final authServices = Provider.of<AuthServices>(context);
     final socketServices = Provider.of<SocketService>(context);
+    final usuariosServices = Provider.of<UsuariosService>(context);
     return Container(
       padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
       // height: size.height,
@@ -81,18 +96,21 @@ class _CustomColumn extends StatelessWidget {
                   authServices.logOut(),
                   Navigator.pushReplacementNamed(context, 'login'),
                 },
-                icon: Icons.person,
-                title: 'Conductores',
+                icon: Icons.logout,
+                title: 'Cerrar Sesion',
                 color: Colors.purple,
               ),
-              const BoxIcon(
-                icon: Icons.monetization_on,
-                title: 'Conductores',
+              BoxIcon(
+                onPressed: () {
+                  Navigator.pushNamed(context, 'usersOnline');
+                },
+                icon: Icons.person,
+                title: 'Usuarios',
                 color: Colors.indigo,
               ),
               const BoxIcon(
                 icon: Icons.history,
-                title: 'Historial',
+                title: 'Viajes',
                 color: Colors.green,
               ),
             ],
@@ -104,7 +122,7 @@ class _CustomColumn extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           SizedBox(
-            height: size.height * 0.4,
+            height: widget.size.height * 0.4,
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
               itemCount: 3,
@@ -115,16 +133,16 @@ class _CustomColumn extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          const HeaderLabel(title: 'Total Conductores', subtitle: 'Ver Todos'),
+          const HeaderLabel(title: 'Total Usuarios', subtitle: 'Ver Todos'),
           SizedBox(
-            height: size.height * 0.4,
+            height: widget.size.height * 0.4,
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
-              itemCount: 3,
+              itemCount: usuariosServices.users.length,
               shrinkWrap: true,
               itemBuilder: (BuildContext context, int index) =>
                   ListDriversWidget(
-                allTripsModel: allDrivers[index],
+                allTripsModel: usuariosServices.users[index],
               ),
             ),
           ),

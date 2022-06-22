@@ -5,7 +5,7 @@ import 'package:gestiones_app/services/coloprovider.dart';
 import 'package:provider/provider.dart';
 
 class ListTripsWidget extends StatelessWidget {
-  final AllTripsModel allTripsModel;
+  final AllTripsResponse allTripsModel;
   const ListTripsWidget({
     Key? key,
     required this.allTripsModel,
@@ -80,7 +80,7 @@ class ListTripsWidget extends StatelessWidget {
               ),
               FittedBox(
                 child: Text(
-                  '${allTripsModel.date.day.toString()}/${allTripsModel.date.month.toString()}/${allTripsModel.date.year.toString()}',
+                  '${allTripsModel.createdAt.day.toString()}/${allTripsModel.createdAt.month.toString()}/${allTripsModel.createdAt.year.toString()}',
                   style: const TextStyle(
                     fontSize: 15,
                   ),
@@ -130,9 +130,9 @@ class ListDriversWidget extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             child: const Icon(
-              Icons.supervised_user_circle,
+              Icons.person_pin,
               color: Colors.white,
-              size: 26,
+              size: 28,
             ),
           ),
           Column(

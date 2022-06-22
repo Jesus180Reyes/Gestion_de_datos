@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:gestiones_app/global/environment.dart';
 import 'package:gestiones_app/models/alldrivers_model.dart';
+import 'package:gestiones_app/models/alltrips_model.dart';
 import 'package:gestiones_app/models/login_response.dart';
 import 'package:http/http.dart' as http;
 
@@ -12,9 +13,10 @@ class AuthServices with ChangeNotifier {
 
   bool? autenticando;
   UsuarioResponse? usuarioResponse;
+  AllTripsResponse? allTripsResponse;
   static Future<String> getToken() async {
     const _storage = FlutterSecureStorage();
-    final token = await _storage.read(key: 'token');
+    String? token = await _storage.read(key: 'token');
 
     return token!;
   }
@@ -90,7 +92,7 @@ class AuthServices with ChangeNotifier {
       Uri.parse('${Enviroment.apiUrl}/login/renew'),
       headers: {
         'Content-Type': 'application/json',
-        'x-token': token.toString(),
+        'x-token': token!,
       },
     );
     if (resp.statusCode == 200) {
@@ -113,5 +115,37 @@ class AuthServices with ChangeNotifier {
 
   Future logOut() async {
     await storage.delete(key: 'token');
+  }
+
+  Future postTrip({
+    required String destiny,
+    required String origin,
+    required String description,
+    required String price,
+  }) async {
+    final data = {
+      'origin': origin,
+      'destiny': destiny,
+      'price': price,
+      'realeaseBy': '${usuarioResponse!.nombre} ${usuarioResponse!.apellido}',
+      'description': description,
+    };
+    final resp = await http.post(
+      Uri.parse('${Enviroment.apiUrl}/login/trips'),
+      body: jsonEncode(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    );
+    if (resp.statusCode == 200) {
+      // autenticando = false;
+      // print(resp.body);
+      // allTripsResponse = allTripsResponseFromJson(resp.body);
+
+      return true;
+    } else {
+      final respBody = jsonDecode(resp.body);
+      return respBody['msg'];
+    }
   }
 }
