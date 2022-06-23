@@ -92,7 +92,7 @@ class AuthServices with ChangeNotifier {
       Uri.parse('${Enviroment.apiUrl}/login/renew'),
       headers: {
         'Content-Type': 'application/json',
-        'x-token': token!,
+        'x-token': token.toString(),
       },
     );
     if (resp.statusCode == 200) {

@@ -51,37 +51,39 @@ tripDialog(context) {
     context: context,
     builder: (_) => AlertDialog(
       title: const Text('Íngresa Datos a Viaje'),
-      content: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          TextField(
-            controller: destinoController,
-            decoration: const InputDecoration(
-              labelText: 'Destino',
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            TextField(
+              controller: destinoController,
+              decoration: const InputDecoration(
+                labelText: 'Destino',
+              ),
             ),
-          ),
-          TextField(
-            controller: origenController,
-            decoration: const InputDecoration(
-              labelText: 'Origen',
+            TextField(
+              controller: origenController,
+              decoration: const InputDecoration(
+                labelText: 'Origen',
+              ),
             ),
-          ),
-          TextField(
-            controller: descriptionController,
-            decoration: const InputDecoration(
-              labelText: 'Description',
+            TextField(
+              controller: descriptionController,
+              decoration: const InputDecoration(
+                labelText: 'Description',
+              ),
             ),
-          ),
-          TextField(
-            keyboardType: TextInputType.phone,
-            controller: precioController,
-            decoration: const InputDecoration(
-              labelText: 'Precio',
+            TextField(
+              keyboardType: TextInputType.phone,
+              controller: precioController,
+              decoration: const InputDecoration(
+                labelText: 'Precio',
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       actions: [
         MaterialButton(

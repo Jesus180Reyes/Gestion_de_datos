@@ -21,6 +21,7 @@ class _UsuariosOnlinePageState extends State<UsuariosOnlinePage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
+        backgroundColor: const Color(0xff2EB7B7),
         centerTitle: true,
         title: const Text('Usuarios conectados'),
       ),
@@ -32,6 +33,7 @@ class _UsuariosOnlinePageState extends State<UsuariosOnlinePage> {
         controller: _refreshController,
         enablePullDown: true,
         header: const WaterDropHeader(
+          waterDropColor: Color(0xff2EB7B7),
           complete: Icon(Icons.check, color: Colors.blue),
         ),
         child: ListView.builder(
@@ -70,6 +72,10 @@ class _Users extends StatelessWidget {
             child: Text('${usuarios.nombre.substring(0, 1)}'
                 '${usuarios.apellido.substring(0, 1)}'),
           ),
+        ),
+        Divider(
+          color: Colors.grey[200],
+          thickness: 2,
         ),
       ],
     );

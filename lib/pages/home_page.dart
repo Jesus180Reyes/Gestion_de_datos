@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:gestiones_app/data/alldrivers.dart';
-import 'package:gestiones_app/data/alltrips.dart';
 import 'package:gestiones_app/helpers/helpers.dart';
 import 'package:gestiones_app/helpers/mostrar_alerta.dart';
 import 'package:gestiones_app/services/authservices.dart';
@@ -21,6 +19,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthServices>(context);
     cambiarColorStatus();
+    cambiarStatusLight();
+
     final size = MediaQuery.of(context).size;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -63,13 +63,21 @@ class _CustomColumn extends StatefulWidget {
 
 class _CustomColumnState extends State<_CustomColumn> {
   @override
+  void initState() {
+    final usuariosServices =
+        Provider.of<UsuariosService>(context, listen: false);
+    usuariosServices.getUsuarios();
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final authServices = Provider.of<AuthServices>(context);
     final socketServices = Provider.of<SocketService>(context);
     final usuariosServices = Provider.of<UsuariosService>(context);
     return Container(
       padding: const EdgeInsets.only(top: 15, left: 10, right: 10),
-      // height: size.height,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: const BorderRadius.only(
@@ -102,33 +110,39 @@ class _CustomColumnState extends State<_CustomColumn> {
               ),
               BoxIcon(
                 onPressed: () {
+                  usuariosServices.getUsuarios();
                   Navigator.pushNamed(context, 'usersOnline');
                 },
                 icon: Icons.person,
                 title: 'Usuarios',
                 color: Colors.indigo,
               ),
-              const BoxIcon(
+              BoxIcon(
+                onPressed: () {
+                  Navigator.pushNamed(context, 'tripsH');
+                },
                 icon: Icons.history,
                 title: 'Viajes',
                 color: Colors.green,
               ),
             ],
           ),
-          const SizedBox(height: 60),
-          const HeaderLabel(
-            subtitle: 'Ver Todos',
-            title: 'Ultimos Viajes',
-          ),
+          SizedBox(height: usuariosServices.trips.isNotEmpty ? 60 : 0),
+          (usuariosServices.trips.isNotEmpty)
+              ? const HeaderLabel(
+                  subtitle: 'Ver Todos', title: 'Ultimos Viajes')
+              : const SizedBox(),
           const SizedBox(height: 20),
           SizedBox(
-            height: widget.size.height * 0.4,
+            height: usuariosServices.trips.isNotEmpty
+                ? widget.size.height * 0.4
+                : 0,
             child: ListView.builder(
               physics: const BouncingScrollPhysics(),
-              itemCount: 3,
+              itemCount: usuariosServices.trips.reversed.length,
               shrinkWrap: true,
-              itemBuilder: (BuildContext context, int index) => ListTripsWidget(
-                allTripsModel: allTrips[index],
+              itemBuilder: (BuildContext context, index) => ListTripsWidget(
+                allTripsModel: usuariosServices.trips[index],
               ),
             ),
           ),

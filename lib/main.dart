@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gestiones_app/pages/loading_page.dart';
+import 'package:gestiones_app/pages/trips_details_page.dart';
+import 'package:gestiones_app/pages/trips_page.dart';
 import 'package:gestiones_app/pages/usuariosonline_page.dart';
 import 'package:gestiones_app/services/authservices.dart';
 import 'package:gestiones_app/services/coloprovider.dart';
@@ -38,6 +40,8 @@ class MyApp extends StatelessWidget {
         'register': (context) => const RegisterPage(),
         'loading': (context) => const LoadingPage(),
         'usersOnline': (context) => const UsuariosOnlinePage(),
+        'tripsH': (context) => const TripsPage(),
+        'tripsD': (context) => const TripsDetailsPage (),
       },
       theme: AppTheme.lightTheme,
     );

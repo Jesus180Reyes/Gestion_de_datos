@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gestiones_app/models/alldrivers_model.dart';
 import 'package:gestiones_app/models/alltrips_model.dart';
 import 'package:gestiones_app/services/coloprovider.dart';
+import 'package:gestiones_app/services/usuarios_services.dart';
 import 'package:provider/provider.dart';
 
 class ListTripsWidget extends StatelessWidget {
@@ -14,11 +15,13 @@ class ListTripsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = Provider.of<ColorProvider>(context).color;
+    final usuariosServices = Provider.of<UsuariosService>(context);
+
     final size = MediaQuery.of(context).size;
     return Container(
       margin: const EdgeInsets.only(top: 20, bottom: 10, left: 5, right: 5),
-      width: size.width,
-      height: size.height * 0.13,
+      width: usuariosServices.trips.isNotEmpty ? size.width : 0,
+      height: usuariosServices.trips.isNotEmpty ? size.height * 0.13 : 0,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(25),
@@ -44,23 +47,32 @@ class ListTripsWidget extends StatelessWidget {
               size: 26,
             ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                allTripsModel.destiny,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+          SizedBox(
+            width: 180,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  allTripsModel.destiny,
+                  maxLines: 2,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    overflow: TextOverflow.ellipsis,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              Text(
-                allTripsModel.origin,
-                style: const TextStyle(
-                  fontSize: 15,
+                Text(
+                  allTripsModel.origin,
+                  maxLines: 1,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
