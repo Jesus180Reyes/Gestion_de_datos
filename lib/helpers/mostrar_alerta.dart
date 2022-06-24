@@ -3,20 +3,52 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gestiones_app/services/authservices.dart';
+import 'package:gestiones_app/services/usuarios_services.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
-mostrarAlerta(context, String titulo, subtitulo) {
+mostrarAlerta(
+    context, String titulo, subtitulo, String lottieUrl, bool? repeat) {
   if (Platform.isAndroid) {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: Text(titulo),
-        content: Text(subtitulo),
+        title: Text(
+          titulo,
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontSize: 25),
+        ),
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Lottie.asset(
+                  lottieUrl,
+                  repeat: repeat ?? true,
+                ),
+              ),
+              Text(
+                subtitulo,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 20,
+                ),
+              ),
+            ],
+          ),
+        ),
         actions: [
           MaterialButton(
-            child: const Text('Ok'),
+            color: Colors.indigo,
+            child: const Text(
+              'Ok',
+              style: TextStyle(fontSize: 16),
+            ),
             elevation: 5,
-            textColor: Colors.blue,
+            textColor: Colors.white,
             onPressed: () => Navigator.pop(context),
           ),
         ],
@@ -42,6 +74,7 @@ mostrarAlerta(context, String titulo, subtitulo) {
 
 tripDialog(context) {
   final authServices = Provider.of<AuthServices>(context, listen: false);
+  final userProvider = Provider.of<UsuariosService>(context, listen: false);
   final destinoController = TextEditingController();
   final origenController = TextEditingController();
   final precioController = TextEditingController();
@@ -98,18 +131,30 @@ tripDialog(context) {
               description: descriptionController.text.trim(),
               price: precioController.text.trim(),
             );
+
             if (dataOk == true) {
+              await userProvider.sendMessage(
+                name: authServices.usuarioResponse!.nombre,
+                message: descriptionController.text.trim(),
+                origin: origenController.text.trim(),
+                destiny: destinoController.text.trim(),
+                price: precioController.text.trim(),
+              );
               Navigator.pop(context);
               mostrarAlerta(
                 context,
                 'Datos enviados exitosamente',
-                'los datos han sido enviados exitosamente',
+                'Datos han sido enviados exitosamente',
+                'assets/checked.json',
+                true,
               );
             } else {
               mostrarAlerta(
                 context,
                 'Datos Incorrectos',
-                'Los datos son incorrectos vuelve a enviarlos correctamente',
+                'Datos son incorrectos vuelve a enviarlos correctamente',
+                'assets/76705-error-animation.json',
+                false,
               );
             }
           },

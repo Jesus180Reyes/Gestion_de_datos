@@ -47,7 +47,12 @@ class CustomForm extends StatelessWidget {
               Navigator.pushReplacementNamed(context, 'home');
             } else {
               mostrarAlerta(
-                  context, 'login Incorrecto', 'Revisa tus credenciales ');
+                context,
+                'login Incorrecto',
+                'Revisa tus credenciales ',
+                'assets/error-animation.json',
+                false,
+              );
             }
           },
         ),
@@ -120,7 +125,12 @@ class CustomFormRegister extends StatelessWidget {
               Navigator.pushReplacementNamed(context, 'home');
             } else {
               mostrarAlerta(
-                  context, 'Registro Incorrecto', registroOk.toString());
+                context,
+                'Registro Incorrecto',
+                registroOk.toString(),
+                'assets/76705-error-animation.json',
+                false,
+              );
             }
           },
         ),
