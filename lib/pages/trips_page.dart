@@ -48,7 +48,7 @@ class TripsPage extends StatelessWidget {
                   ],
                 ),
               )
-            : const NoDataPage(),
+            : const NoDataPage(lottiUrl: 'assets/empty-state.json'),
       ),
     );
   }

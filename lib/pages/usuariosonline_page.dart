@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gestiones_app/models/alldrivers_model.dart';
+import 'package:gestiones_app/pages/nodata_page.dart';
 import 'package:gestiones_app/services/usuarios_services.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -36,12 +37,17 @@ class _UsuariosOnlinePageState extends State<UsuariosOnlinePage> {
           waterDropColor: Color(0xff2EB7B7),
           complete: Icon(Icons.check, color: Colors.blue),
         ),
-        child: ListView.builder(
-          itemCount: user.users.length,
-          itemBuilder: (BuildContext context, int index) {
-            return _Users(usuarios: user.users[index]);
-          },
-        ),
+        child: (user.users.isNotEmpty)
+            ? ListView.builder(
+                itemCount: user.users.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return _Users(usuarios: user.users[index]);
+                },
+              )
+            : const NoDataPage(
+                lottiUrl: 'assets/users-and-vr-loop.json',
+                repeat: true,
+              ),
       ),
     );
   }
