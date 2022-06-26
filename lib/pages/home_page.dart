@@ -130,7 +130,10 @@ class _CustomColumnState extends State<_CustomColumn> {
           SizedBox(height: usuariosServices.trips.isNotEmpty ? 60 : 0),
           (usuariosServices.trips.isNotEmpty)
               ? const HeaderLabel(
-                  subtitle: 'Ver Todos', title: 'Ultimos Viajes')
+                  subtitle: 'Ver Todos',
+                  title: 'Ultimos Viajes',
+                  route: 'tripsH',
+                )
               : const SizedBox(),
           const SizedBox(height: 20),
           SizedBox(
@@ -147,7 +150,11 @@ class _CustomColumnState extends State<_CustomColumn> {
             ),
           ),
           const SizedBox(height: 20),
-          const HeaderLabel(title: 'Total Usuarios', subtitle: 'Ver Todos'),
+          const HeaderLabel(
+            title: 'Total Usuarios',
+            subtitle: 'Ver Todos',
+            route: 'usersOnline',
+          ),
           SizedBox(
             height: widget.size.height * 0.4,
             child: ListView.builder(

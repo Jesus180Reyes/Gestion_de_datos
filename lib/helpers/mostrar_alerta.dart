@@ -13,6 +13,9 @@ mostrarAlerta(
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
         title: Text(
           titulo,
           textAlign: TextAlign.center,
@@ -88,33 +91,81 @@ tripDialog(context) {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.max,
           children: [
-            TextField(
-              controller: destinoController,
-              decoration: const InputDecoration(
-                labelText: 'Destino',
+            Container(
+              height: 50,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: TextField(
+                textCapitalization: TextCapitalization.words,
+                controller: destinoController,
+                decoration: const InputDecoration(
+                  hintText: 'Destino',
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.all(10),
+                ),
               ),
             ),
-            TextField(
-              controller: origenController,
-              decoration: const InputDecoration(
-                labelText: 'Origen',
+            const SizedBox(height: 10),
+            Container(
+              height: 50,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: TextField(
+                textCapitalization: TextCapitalization.words,
+                controller: origenController,
+                decoration: const InputDecoration(
+                  hintText: 'Origen',
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.all(10),
+                ),
               ),
             ),
-            TextField(
-              controller: descriptionController,
-              decoration: const InputDecoration(
-                labelText: 'Description',
+            const SizedBox(height: 10),
+            Container(
+              height: 50,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: TextField(
+                keyboardType: TextInputType.phone,
+                controller: precioController,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Precio',
+                  contentPadding: EdgeInsets.all(10),
+                ),
               ),
             ),
-            TextField(
-              keyboardType: TextInputType.phone,
-              controller: precioController,
-              decoration: const InputDecoration(
-                labelText: 'Precio',
+            const SizedBox(height: 30),
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: TextField(
+                textCapitalization: TextCapitalization.sentences,
+                maxLength: 200,
+                maxLines: null,
+                controller: descriptionController,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Descripción',
+                  contentPadding: EdgeInsets.all(10),
+                ),
               ),
             ),
+            const SizedBox(height: 10),
           ],
         ),
       ),
