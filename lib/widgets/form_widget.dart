@@ -33,7 +33,7 @@ class CustomForm extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         BotonAzul(
-          title: 'Incio de Sesion',
+          title: 'Inicio de Sesion',
           onPressed: () async {
             FocusScope.of(context).unfocus();
             final loginOk = await authServices.login(

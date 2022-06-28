@@ -76,17 +76,22 @@ class ListTripsWidget extends StatelessWidget {
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(
-                width: size.width * 0.25,
-                child: Text(
-                  '-${allTripsModel.price}',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    overflow: TextOverflow.ellipsis,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.red,
+              FittedBox(
+                child: SizedBox(
+                  width: 70,
+                  height: 20,
+                  child: Text(
+                    '-${allTripsModel.price}',
+                    textAlign: TextAlign.start,
+                    maxLines: 1,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      overflow: TextOverflow.ellipsis,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.red,
+                    ),
                   ),
                 ),
               ),
@@ -94,7 +99,7 @@ class ListTripsWidget extends StatelessWidget {
                 child: Text(
                   '${allTripsModel.createdAt.day.toString()}/${allTripsModel.createdAt.month.toString()}/${allTripsModel.createdAt.year.toString()}',
                   style: const TextStyle(
-                    fontSize: 15,
+                    fontSize: 12,
                   ),
                 ),
               ),

@@ -15,6 +15,7 @@ class AllTripsResponse {
     required this.destiny,
     required this.origin,
     required this.realeaseBy,
+    required this.phone,
     required this.price,
     required this.description,
     required this.createdAt,
@@ -30,6 +31,7 @@ class AllTripsResponse {
   final DateTime createdAt;
   final String hourAt;
   final String uid;
+  final String phone;
 
   factory AllTripsResponse.fromJson(Map<String, dynamic> json) =>
       AllTripsResponse(
@@ -41,6 +43,7 @@ class AllTripsResponse {
         createdAt: DateTime.parse(json["createdAt"]),
         hourAt: json["hourAt"],
         uid: json["uid"],
+        phone: json["telefono"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -52,5 +55,6 @@ class AllTripsResponse {
         "createdAt": createdAt.toIso8601String(),
         "hourAt": hourAt,
         "uid": uid,
+        "telefono": phone,
       };
 }

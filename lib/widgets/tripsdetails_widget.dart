@@ -78,7 +78,7 @@ class DetailsTripDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: size.height * 0.3,
+      height: size.height * 0.32,
       margin: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.grey[300],
@@ -95,59 +95,82 @@ class DetailsTripDate extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Column(
-                children: [
-                  Text(
-                    trip.origin,
-                    style: const TextStyle(
-                      fontSize: 18,
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  children: [
+                    SizedBox(
+                      width: 130,
+                      height: 60,
+                      child: Text(
+                        trip.origin,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
                     ),
-                  ),
-                  Text(
-                    trip.origin.substring(0, 3),
-                    textAlign: TextAlign.justify,
-                    style: const TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 0.5,
+                    Text(
+                      trip.origin.substring(0, 3),
+                      textAlign: TextAlign.justify,
+                      style: const TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.5,
+                      ),
                     ),
+                  ],
+                ),
+                const SizedBox(
+                  // color: Colors.red,
+                  width: 60,
+                  height: 70,
+                  child: Icon(
+                    Icons.arrow_right_rounded,
+                    size: 60,
+                    color: Colors.green,
                   ),
-                ],
-              ),
-              const Icon(
-                Icons.arrow_right_rounded,
-                size: 60,
-                color: Colors.green,
-              ),
-              Column(
-                children: [
-                  Text(
-                    trip.destiny,
-                    style: const TextStyle(
-                      fontSize: 18,
+                ),
+                Column(
+                  children: [
+                    SizedBox(
+                      // color: Colors.red,
+                      width: 130,
+                      height: 60,
+                      child: Text(
+                        trip.destiny,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
                     ),
-                  ),
-                  Text(
-                    trip.destiny.substring(0, 3),
-                    textAlign: TextAlign.justify,
-                    style: const TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 0.5,
+                    Text(
+                      trip.destiny.substring(0, 3),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 0.5,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 20),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Container(
-              margin: const EdgeInsets.only(right: 20, top: 10),
+              margin: const EdgeInsets.only(top: 10),
               child: Row(
                 children: [
                   CustomBox(

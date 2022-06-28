@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gestiones_app/launchers/url_launcher.dart';
 import 'package:gestiones_app/models/alltrips_model.dart';
 import 'package:gestiones_app/widgets/pricedetailtrip_widget.dart';
 import 'package:gestiones_app/widgets/tripsdetails_widget.dart';
@@ -14,6 +16,22 @@ class TripsDetailsPage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () async {
+              final url = 'tel:${trip.phone}';
+              await urlLauncher(url);
+            },
+            icon: const Icon(Icons.call),
+          ),
+          IconButton(
+            onPressed: () async {
+              final url = 'https://wa.me/504${trip.phone}';
+              await urlLauncher(url);
+            },
+            icon: const Icon(FontAwesomeIcons.whatsapp, color: Colors.green),
+          ),
+        ],
         foregroundColor: Colors.black,
         title: const Text(
           'Detalles del viaje',

@@ -122,13 +122,16 @@ class AuthServices with ChangeNotifier {
     required String origin,
     required String description,
     required String price,
+    required String product,
   }) async {
     final data = {
       'origin': origin,
       'destiny': destiny,
       'price': price,
       'realeaseBy': '${usuarioResponse!.nombre} ${usuarioResponse!.apellido}',
+      'telefono': usuarioResponse!.telefono,
       'description': description,
+      'product': product,
     };
     final resp = await http.post(
       Uri.parse('${Enviroment.apiUrl}/login/trips'),

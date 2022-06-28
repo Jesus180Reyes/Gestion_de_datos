@@ -18,6 +18,7 @@ class UsuarioResponse {
     required this.online,
     required this.createdAt,
     required this.uid,
+    required this.telefono,
   });
 
   final String nombre;
@@ -26,6 +27,7 @@ class UsuarioResponse {
   final DateTime createdAt;
   final String uid;
   final String apellido;
+  final String telefono;
 
   factory UsuarioResponse.fromJson(Map<String, dynamic> json) =>
       UsuarioResponse(
@@ -35,6 +37,7 @@ class UsuarioResponse {
         createdAt: DateTime.parse(json["createdAt"]),
         uid: json["uid"],
         apellido: json["apellido"],
+        telefono: json["telefono"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -44,5 +47,6 @@ class UsuarioResponse {
         "createdAt": createdAt.toIso8601String(),
         "uid": uid,
         "apellido": apellido,
+        "telefono": telefono,
       };
 }

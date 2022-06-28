@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gestiones_app/services/authservices.dart';
 import 'package:gestiones_app/services/usuarios_services.dart';
 import 'package:lottie/lottie.dart';
@@ -82,6 +83,7 @@ tripDialog(context) {
   final origenController = TextEditingController();
   final precioController = TextEditingController();
   final descriptionController = TextEditingController();
+  final typeController = TextEditingController();
 
   showDialog(
     context: context,
@@ -148,6 +150,52 @@ tripDialog(context) {
             ),
             const SizedBox(height: 30),
             Container(
+              height: 50,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: DropdownButtonFormField<String>(
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  contentPadding: EdgeInsets.all(10),
+                ),
+                hint: const Text('Tipo de Producto'),
+                icon: const Icon(FontAwesomeIcons.shrimp, color: Colors.orange),
+                items: const [
+                  DropdownMenuItem(
+                    value: 'Entero Fresco(Cabezas)',
+                    child: Text('Entero Fresco (Cabezas)'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Shellon (Colas)',
+                    child: Text('Shellon (Colas)'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'PVD (Pelado Abierto)',
+                    child: Text('PVD (Pelado Abierto)'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'PND (Pelado Al Redondo)',
+                    child: Text('PND (Pelado Al Redondo)'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'PPV',
+                    child: Text('PPV (Pelado con Cuchillo)'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'PUD (Pelado Con Aguja)',
+                    child: Text('PUD (Pelado Con Aguja)'),
+                  ),
+                ],
+                onChanged: (value) {
+                  typeController.text = value!;
+                },
+              ),
+            ),
+            const SizedBox(height: 30),
+            Container(
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.grey[200],
@@ -181,6 +229,7 @@ tripDialog(context) {
               origin: origenController.text.trim(),
               description: descriptionController.text.trim(),
               price: precioController.text.trim(),
+              product: typeController.text.trim(),
             );
 
             if (dataOk == true) {
