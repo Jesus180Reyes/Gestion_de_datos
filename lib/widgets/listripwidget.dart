@@ -152,23 +152,29 @@ class ListDriversWidget extends StatelessWidget {
               size: 28,
             ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                allTripsModel.nombre,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+          SizedBox(
+            width: 150,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  allTripsModel.nombre,
+                  maxLines: 2,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              Text(
-                allTripsModel.email,
-                style: const TextStyle(
-                  fontSize: 15,
+                Text(
+                  allTripsModel.email,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 13,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -179,7 +185,7 @@ class ListDriversWidget extends StatelessWidget {
                   '-${allTripsModel.uid}',
                   textAlign: TextAlign.center,
                   style: const TextStyle(
-                    fontSize: 20,
+                    fontSize: 14,
                     overflow: TextOverflow.ellipsis,
                     fontWeight: FontWeight.w500,
                     color: Colors.red,
@@ -190,7 +196,7 @@ class ListDriversWidget extends StatelessWidget {
                 child: Text(
                   '${allTripsModel.createdAt.day.toString()}/${allTripsModel.createdAt.month.toString()}/${allTripsModel.createdAt.year.toString()}',
                   style: const TextStyle(
-                    fontSize: 15,
+                    fontSize: 12,
                   ),
                 ),
               ),

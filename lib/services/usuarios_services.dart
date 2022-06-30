@@ -40,13 +40,13 @@ class UsuariosService with ChangeNotifier {
     notifyListeners();
   }
 
-  Future sendMessage({
-    required String name,
-    required String message,
-    required String origin,
-    required String destiny,
-    required String price,
-  }) async {
+  Future sendMessage(
+      {required String name,
+      required String message,
+      required String origin,
+      required String destiny,
+      required String price,
+      required String product}) async {
     String serviceId = 'service_amjvdra';
     String templateId = 'template_ynb6n1f';
     String userId = '4CTVl1XhPUCYxIoF4';
@@ -68,6 +68,7 @@ class UsuariosService with ChangeNotifier {
             'origin': origin,
             'destiny': destiny,
             'price': price,
+            'product': product,
           }
         },
       ),

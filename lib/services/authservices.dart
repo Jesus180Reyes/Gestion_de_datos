@@ -8,8 +8,9 @@ import 'package:gestiones_app/models/alltrips_model.dart';
 import 'package:gestiones_app/models/login_response.dart';
 import 'package:http/http.dart' as http;
 
-class AuthServices with ChangeNotifier {
+class AuthServices extends ChangeNotifier {
   final storage = const FlutterSecureStorage();
+  bool isSaving = false;
 
   bool? autenticando;
   UsuarioResponse? usuarioResponse;
@@ -124,6 +125,9 @@ class AuthServices with ChangeNotifier {
     required String price,
     required String product,
   }) async {
+    isSaving = true;
+    notifyListeners();
+
     final data = {
       'origin': origin,
       'destiny': destiny,
@@ -141,12 +145,15 @@ class AuthServices with ChangeNotifier {
       },
     );
     if (resp.statusCode == 200) {
+      isSaving = false;
+      notifyListeners();
       // autenticando = false;
       // print(resp.body);
       // allTripsResponse = allTripsResponseFromJson(resp.body);
-
       return true;
     } else {
+      isSaving = false;
+      notifyListeners();
       return false;
     }
   }

@@ -14,7 +14,7 @@ class NoAccountWidget extends StatelessWidget {
       children: [
         const Text(
           'Todavia no tienes una cuenta?',
-          style: TextStyle(fontSize: 14),
+          style: TextStyle(fontSize: 14, color: Colors.orange),
         ),
         const SizedBox(width: 5),
         InkWell(

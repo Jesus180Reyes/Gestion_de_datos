@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gestiones_app/services/authservices.dart';
 import 'package:gestiones_app/services/socketservices.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class LoadingPage extends StatelessWidget {
@@ -18,8 +19,11 @@ class LoadingPage extends StatelessWidget {
           (value) => checkLoginState(context),
         ),
         builder: (context, snapshot) {
-          return const Center(
-            child: Text('Espere...'),
+          return Center(
+            child: Lottie.asset(
+              'assets/loading.json',
+              repeat: true,
+            ),
           );
         },
       ),
