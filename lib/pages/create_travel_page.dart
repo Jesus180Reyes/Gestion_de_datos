@@ -181,52 +181,56 @@ class _CreateTrip extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         MaterialButton(
+          disabledColor: Colors.grey[300],
+          disabledTextColor: Colors.black,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
           height: 60,
           color: Colors.orange,
-          onPressed: () async {
-            final dataOk = await authServices.postTrip(
-              destiny: destinoController.text.trim(),
-              origin: origenController.text.trim(),
-              description: descriptionController.text.trim(),
-              price: precioController.text.trim(),
-              product: typeController.text.trim(),
-            );
+          onPressed: authServices.isSaving != false
+              ? null
+              : () async {
+                  final dataOk = await authServices.postTrip(
+                    destiny: destinoController.text.trim(),
+                    origin: origenController.text.trim(),
+                    description: descriptionController.text.trim(),
+                    price: precioController.text.trim(),
+                    product: typeController.text.trim(),
+                  );
 
-            if (dataOk == true) {
-              await userProvider.sendMessage(
-                name: authServices.usuarioResponse!.nombre +
-                    ' ' +
-                    authServices.usuarioResponse!.apellido.trim(),
-                message: descriptionController.text.trim(),
-                origin: origenController.text.trim(),
-                destiny: destinoController.text.trim(),
-                price: precioController.text.trim(),
-                product: typeController.text.trim(),
-              );
-              mostrarAlerta(
-                context,
-                'Datos enviados exitosamente',
-                'Datos han sido enviados exitosamente',
-                'assets/checked.json',
-                true,
-              );
-              descriptionController.clear();
-              origenController.clear();
-              destinoController.clear();
-              precioController.clear();
-            } else {
-              mostrarAlerta(
-                context,
-                'Datos Incorrectos',
-                'Datos son incorrectos vuelve a enviarlos correctamente',
-                'assets/76705-error-animation.json',
-                false,
-              );
-            }
-          },
+                  if (dataOk == true) {
+                    await userProvider.sendMessage(
+                      name: authServices.usuarioResponse!.nombre +
+                          ' ' +
+                          authServices.usuarioResponse!.apellido.trim(),
+                      message: descriptionController.text.trim(),
+                      origin: origenController.text.trim(),
+                      destiny: destinoController.text.trim(),
+                      price: precioController.text.trim(),
+                      product: typeController.text.trim(),
+                    );
+                    mostrarAlerta(
+                      context,
+                      'Datos enviados exitosamente',
+                      'Datos han sido enviados exitosamente',
+                      'assets/checked.json',
+                      true,
+                    );
+                    descriptionController.clear();
+                    origenController.clear();
+                    destinoController.clear();
+                    precioController.clear();
+                  } else {
+                    mostrarAlerta(
+                      context,
+                      'Datos Incorrectos',
+                      'Datos son incorrectos vuelve a enviarlos correctamente',
+                      'assets/76705-error-animation.json',
+                      false,
+                    );
+                  }
+                },
           child: Row(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -234,10 +238,14 @@ class _CreateTrip extends StatelessWidget {
             children: [
               authServices.isSaving
                   ? const CircularProgressIndicator(color: Colors.white)
-                  : const Text(
-                      'Crear Viaje',
+                  : Text(
+                      authServices.isSaving == false
+                          ? 'Crear Viaje'
+                          : 'Enviando Datos',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: authServices.isSaving == false
+                            ? Colors.white
+                            : Colors.black,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),

@@ -14,7 +14,7 @@ class NoAccountWidget extends StatelessWidget {
       children: [
         const Text(
           'Todavia no tienes una cuenta?',
-          style: TextStyle(fontSize: 14, color: Colors.orange),
+          style: TextStyle(fontSize: 14),
         ),
         const SizedBox(width: 5),
         InkWell(
@@ -24,7 +24,7 @@ class NoAccountWidget extends StatelessWidget {
             style: TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.bold,
-              color: Colors.blue,
+              color: Colors.orange,
             ),
           ),
         ),

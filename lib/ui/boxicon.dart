@@ -22,6 +22,7 @@ class BoxIcon extends StatelessWidget {
         }
       },
       child: Container(
+        margin: const EdgeInsets.only(right: 10, top: 20),
         width: 100,
         height: 100,
         decoration: BoxDecoration(

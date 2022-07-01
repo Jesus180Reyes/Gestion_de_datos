@@ -94,38 +94,46 @@ class _CustomColumnState extends State<_CustomColumn> {
       ),
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              BoxIcon(
-                onPressed: () => {
-                  socketServices.disconnect(),
-                  authServices.logOut(),
-                  Navigator.pushReplacementNamed(context, 'login'),
-                },
-                icon: Icons.logout,
-                title: 'Cerrar Sesion',
-                color: Colors.purple,
-              ),
-              BoxIcon(
-                onPressed: () {
-                  usuariosServices.getUsuarios();
-                  Navigator.pushNamed(context, 'usersOnline');
-                },
-                icon: Icons.person,
-                title: 'Usuarios',
-                color: Colors.indigo,
-              ),
-              BoxIcon(
-                onPressed: () {
-                  Navigator.pushNamed(context, 'tripsH');
-                },
-                icon: Icons.history,
-                title: 'Viajes',
-                color: Colors.green,
-              ),
-            ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            child: Row(
+              children: [
+                BoxIcon(
+                  onPressed: () => {
+                    socketServices.disconnect(),
+                    authServices.logOut(),
+                    Navigator.pushReplacementNamed(context, 'login'),
+                  },
+                  icon: Icons.logout,
+                  title: 'Cerrar Sesion',
+                  color: Colors.purple,
+                ),
+                BoxIcon(
+                  onPressed: () {
+                    usuariosServices.getUsuarios();
+                    Navigator.pushNamed(context, 'usersOnline');
+                  },
+                  icon: Icons.person,
+                  title: 'Usuarios',
+                  color: Colors.indigo,
+                ),
+                BoxIcon(
+                  onPressed: () {
+                    Navigator.pushNamed(context, 'tripsH');
+                  },
+                  icon: Icons.history,
+                  title: 'Viajes',
+                  color: Colors.green,
+                ),
+                BoxIcon(
+                  title: 'Reportes',
+                  icon: Icons.report,
+                  color: Colors.orange,
+                  onPressed: () => Navigator.pushNamed(context, 'reports'),
+                ),
+              ],
+            ),
           ),
           SizedBox(height: usuariosServices.trips.isNotEmpty ? 60 : 0),
           (usuariosServices.trips.isNotEmpty)
