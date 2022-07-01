@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gestiones_app/pages/create_report_page.dart';
 import 'package:gestiones_app/pages/create_travel_page.dart';
 import 'package:gestiones_app/pages/loading_page.dart';
+import 'package:gestiones_app/pages/reports_page.dart';
 import 'package:gestiones_app/pages/trips_details_page.dart';
 import 'package:gestiones_app/pages/trips_page.dart';
 import 'package:gestiones_app/pages/usuariosonline_page.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
         'tripsD': (context) => const TripsDetailsPage(),
         'create_trip': (context) => const CreateTravelPage(),
         'create_report': (context) => const CreateReportPage(),
+        'reports': (context) => const ReportsPage(),
       },
       theme: AppTheme.lightTheme,
     );
